@@ -113,12 +113,8 @@ var _this = {};
 		}
 
 		function loadImageData( fileData, callback ){
-
-			if (Buffer.isBuffer(fileData)) {
-				var png = new PNG();
-				png.parse(fileData, function (err, data) {
-				  callback(data, data.width, data.height);
-				});
+			if (fileData.data) {
+				callback(fileData, fileData.width, fileData.height);
 			} else {
 				var ext = fileData.substring(fileData.lastIndexOf(".")+1);
 				if(ext=="png") {
@@ -134,7 +130,7 @@ var _this = {};
 					fileData = jpeg.decode(jpegData, true);
 					callback(fileData, fileData.width, fileData.height);
 				}
-			};
+			}
 		}
 
 		function isColorSimilar(a, b, color){
