@@ -113,11 +113,8 @@ let _this = {};
 		}
 
 		function loadImageData( fileData, callback ){
-			if (Buffer.isBuffer(fileData)) {
-				let png = new PNG();
-				png.parse(fileData, function (err, data) {
-				  callback(data, data.width, data.height);
-				});
+			if (fileData.data) {
+				callback(fileData, fileData.width, fileData.height);
 			} else {
 				let ext = fileData.substring(fileData.lastIndexOf(".")+1);
 				if(ext=="png") {
